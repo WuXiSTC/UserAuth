@@ -1,7 +1,10 @@
 package Dao
 
-import "./Database"
-import "./Cache"
+import (
+	"../util"
+	"./Cache"
+	"./Database"
+)
 
 /*在数据库中更新密码*/
 func UpdateUser(user, newUser User) (bool, error) {
@@ -10,10 +13,10 @@ func UpdateUser(user, newUser User) (bool, error) {
 	PASS := user.GetPASS()
 	newPASS := newUser.GetPASS()
 	ok, err := Database.UpdateUser(ID, PASS, newPASS)
-	errorHandler(err)
+	util.LogE(err)
 	if err == nil && ok { //数据库的验证通过了就写入缓存
 		_, errR := Cache.SetUser(ID, newPASS)
-		errorHandler(errR)
+		util.LogE(errR)
 	}
 	return ok, err
 }

@@ -1,11 +1,11 @@
 package Database
 
 import (
+	"../../util"
 	"database/sql"
 	_ "github.com/go-sql-driver/mysql"
 	"gopkg.in/yaml.v2"
 	"io/ioutil"
-	"log"
 )
 
 type config struct {
@@ -22,10 +22,10 @@ func RDBConnect() (*sql.DB, error) {
 		return db, nil
 	}
 	yamlFile, err := ioutil.ReadFile("DatabaseConfig.yaml")
-	loge(err)
+	util.LogE(err)
 	if err == nil {
 		err = yaml.Unmarshal(yamlFile, &Conf)
-		loge(err)
+		util.LogE(err)
 	}
 	db, err := sql.Open(Conf.Driver, Conf.DataSource)
 	if err != nil {
@@ -33,10 +33,4 @@ func RDBConnect() (*sql.DB, error) {
 	}
 	db.SetMaxOpenConns(Conf.MaxOpenConns)
 	return db, nil
-}
-
-func loge(err error) {
-	if err != nil {
-		log.Println(err)
-	}
 }
