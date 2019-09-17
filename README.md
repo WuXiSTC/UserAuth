@@ -1,15 +1,23 @@
 # UserAuth
 
-#### Description
+## Description
 
 * 本项目是无锡市软件测试中心的用户验证服务
 * 项目基于Go语言，数据库使用MySQL，并使用了Redis作为缓存
 
-#### Software Architecture
+## Software Architecture
 
 * 本项目由一系列API组成，包含用户注册、用户验证、密码修改三个功能
 
-#### Installation
+### 代码结构
+
+本项目使用 iris 框架，按照典型的三层Web应用结构进行组织。从外到内对应的文件夹依次是`Controller`、`Service`、`Dao`。
+
+* `Controller`：存放API的处理函数，与最外层的`Web API`直接相连，所有的Web请求皆直接传递到此文件夹的函数中，是对`Controller`层的`Web API`封装；
+* `Service`：由`Controller`中各函数调用，处理网站业务逻辑，通过`Dao`层操作数据；
+* `Dao`：封装一系列数据操作，向`Service`层隐藏数据库和缓存架构。
+
+## Installation
 
 1. 安装redis，使运行于`localhost:6379`
 2. `go get github.com/kataras/iris`
@@ -21,9 +29,9 @@
 4. `cd UserAuth`
 5. `go run main.go`
 
-#### Instructions
+## Instructions
 
-##### POST列表
+### POST列表
 
 1. /register：用户注册
    * ID：要注册的用户名
@@ -36,7 +44,7 @@
    * PASS：原始密码
    * newPASS：新密码
 
-##### 返回值列表
+### 返回值列表
 
 所有的返回值均为JSON格式：`{"ok":true|false,"message":"返回信息"}`
 
@@ -50,14 +58,14 @@
    * 用户密码信息成功修改：`ok`为`true`，`message`为空
    * 否则：`ok`为`false`，`message`为“用户名或密码错误”或错误信息
 
-#### Contribution
+## Contribution
 
 1. Fork the repository
 2. Create Feat_xxx branch
 3. Commit your code
 4. Create Pull Request
 
-#### Gitee Feature
+## Gitee Feature
 
 1. You can use Readme\_XXX.md to support different languages, such as Readme\_en.md, Readme\_zh.md
 2. Gitee blog [blog.gitee.com](https://blog.gitee.com)

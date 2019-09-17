@@ -13,9 +13,16 @@ type config struct {
 var Conf = config{false, ""}
 
 func main() {
-	util.GetConf("ServerConfig.yaml", &Conf)
 
-	app := MasterApp(Conf)
+	util.GetConf("SlaveConfig.yaml", &Conf)
+
+	var app *iris.Application
+
+	if Conf.SlaveMode { //从属模式
+		app = SlaveApp(Conf)
+	} else { //主机模式
+		app = MasterApp(Conf)
+	}
 
 	err := app.Run(iris.Addr(":8080"))
 	util.LogE(err)
