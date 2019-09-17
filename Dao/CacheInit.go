@@ -11,7 +11,7 @@ func CacheInit() error {
 	if err != nil {
 		return err
 	}
-	rows, err := db.Query("SELECT ID,PASS FROM Users LIMIT ?", Cache.InitN)
+	rows, err := db.Query("SELECT ID,PASS FROM Users LIMIT ?", Cache.Conf.InitialCache)
 	if err != nil {
 		return err
 	}

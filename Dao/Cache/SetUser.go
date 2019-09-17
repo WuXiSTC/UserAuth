@@ -7,5 +7,5 @@ func SetUser(ID, PASS string) (interface{}, error) {
 	if err != nil {
 		return nil, err
 	}
-	return db.Do("SET", ID, PASS, "EX", EX+rand.Intn(ranEX))
+	return db.Do("SET", ID, PASS, "EX", Conf.ExistTime+rand.Intn(Conf.RandExistTime))
 }
