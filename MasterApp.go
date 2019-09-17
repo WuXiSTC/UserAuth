@@ -8,7 +8,7 @@ import (
 	"github.com/kataras/iris/middleware/logger"
 )
 
-func MasterApp(conf config) *iris.Application {
+func MasterApp() *iris.Application {
 	util.LogE(Dao.CacheInit())
 
 	app := iris.New()
