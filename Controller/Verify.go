@@ -5,7 +5,7 @@ import (
 	"github.com/kataras/iris"
 )
 
-/*用户验证API*/
+//用户验证，对应/verify，封装Service.VerifyUser
 func Verify(ctx iris.Context) {
 	ID := ctx.PostValue("ID")
 	PASS := ctx.PostValue("PASS")

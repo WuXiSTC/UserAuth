@@ -5,7 +5,7 @@ import (
 	"github.com/kataras/iris"
 )
 
-/*只用缓存验证用户，仅用于Slave模式*/
+//只用缓存验证用户，仅用于Slave模式的/verify，封装Service.VerifyCachedUser
 func VerifyCached(ctx iris.Context) {
 	ID := ctx.PostValue("ID")
 	PASS := ctx.PostValue("PASS")
