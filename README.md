@@ -7,7 +7,9 @@
 
 ## Software Architecture
 
-* 本项目由一系列API组成，包含用户注册、用户验证、密码修改三个功能
+* 本项目由一系列API组成，分两种模式：
+  * 主机模式：拥有数据库和缓存，可读可写，包含用户注册、用户验证、密码修改三个功能
+  * 从机模式：仅有缓存，缓存与主机缓存同步，只读，仅包含用户验证功能
 
 ### 代码结构
 
@@ -19,19 +21,42 @@
 
 ## Installation
 
-1. 安装redis，使运行于`localhost:6379`
+### 准备
+
+1. 安装redis
 2. `go get github.com/kataras/iris`
 
    `go get github.com/go-sql-driver/mysql`
 
    `go get github.com/garyburd/redigo/redis`
 3. `git clone https://gitee.com/WuXiSTC/UserAuth`
+
+### 以主机模式启动
+
+1. 安装mysql
+2. 用Dao文件夹下的两个.sql文件建mysql数据库
+3. 在配置文件中写上redis和mysql的地址，并配置为主机模式(详见配置文件说明)
 4. `cd UserAuth`
 5. `go run main.go`
 
+### 以从机模式启动
+
+1. 在别的地方以主机模式启动一个本应用
+2. 在配置文件中写上以主机模式启动的那个应用的redis数据库地址和端口号(详见配置文件说明)
+3. `cd UserAuth`
+4. `go run main.go`
+
 ## Instructions
 
-### POST列表
+### 单主机模式
+
+按照上文“以主机模式启动”的说明启动单个主机，这是通常的数据库+缓存模式
+
+### 多主机模式
+
+启动一个主机和多个从机，写任务交给主机，读任务交给从机，在此应用外面再套一层负载均衡或者用从机建一个CDN网络
+
+### 主机模式POST格式
 
 1. /register：用户注册
    * ID：要注册的用户名
@@ -44,7 +69,13 @@
    * PASS：原始密码
    * newPASS：新密码
 
-### 返回值列表
+#### 从机模式POST格式
+
+1. /ping：用于检查从属服务器是否在线
+   * 无参数
+2. /verify：用户验证同主服务
+
+### 主机模式返回值
 
 所有的返回值均为JSON格式：`{"ok":true|false,"message":"返回信息"}`
 
@@ -57,6 +88,13 @@
 3. /update：修改密码
    * 用户密码信息成功修改：`ok`为`true`，`message`为空
    * 否则：`ok`为`false`，`message`为“用户名或密码错误”或错误信息
+
+### 从机模式返回值
+
+1. /ping：
+   * 在线且请求来自主服务器：返回PONG
+   * 其他情况无返回
+2. /verify：用户验证同主服务
 
 ## Contribution
 
