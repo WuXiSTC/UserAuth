@@ -4,6 +4,7 @@ import (
 	"github.com/kataras/iris"
 )
 
+/*在所有的数据操作接口之前调用的格式检查*/
 func BeforeHandler(ctx iris.Context) {
 	ID := ctx.PostValue("ID")
 	PASS := ctx.PostValue("PASS")

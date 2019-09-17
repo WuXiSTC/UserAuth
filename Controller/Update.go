@@ -5,6 +5,7 @@ import (
 	"github.com/kataras/iris"
 )
 
+/*修改密码API*/
 func Update(ctx iris.Context) {
 	ID := ctx.PostValue("ID")
 	PASS := ctx.PostValue("PASS")

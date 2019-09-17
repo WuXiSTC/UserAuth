@@ -1,3 +1,4 @@
+#数据库配置文件
 Driver: mysql
 DataSource: WXSTC:WXSTC@tcp(127.0.0.1:3306)/WXSTC?charset=utf8 #数据库连接
 MaxOpenConns: 4 #数据库中同时存在的连接总数

@@ -6,7 +6,9 @@ import (
 	"./Database"
 )
 
-/*查询用户名密码是否正确*/
+//验证用户：验证用户名密码是否正确
+//
+//返回值是(bool,error)分别表示验证是否通过和错误信息
 func QueryUser(user User) (bool, error) {
 	ID := user.GetID()
 	PASS := user.GetPASS()

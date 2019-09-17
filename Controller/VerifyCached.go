@@ -5,11 +5,7 @@ import (
 	"github.com/kataras/iris"
 )
 
-/*
-仅用于Slave模式
-一个特殊的缓存操作：只用缓存验证用户
-在这样的调用只能在缓存结构没有隐藏时才可用，因此Service层无意义，直接从Controller层调用Dao层
-*/
+/*只用缓存验证用户，仅用于Slave模式*/
 func VerifyCached(ctx iris.Context) {
 	ID := ctx.PostValue("ID")
 	PASS := ctx.PostValue("PASS")

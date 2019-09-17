@@ -6,7 +6,9 @@ import (
 	"./Database"
 )
 
-/*插入用户*/
+//插入用户，先插数据库再插缓存
+//
+//返回值是(bool,error)分别表示插入是否成功和错误信息
 func InsertUser(user User) (bool, error) {
 	ID := user.GetID()
 	PASS := user.GetPASS()

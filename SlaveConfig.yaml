@@ -1,3 +1,4 @@
+#从机模式配置文件
 SlaveMode: false #是否是从属模式
 MasterHost: redis #如果是从属模式，则在此指定主服务的Redis地址
 MasterPort: 6379 #如果是从属模式，则在此指定主服务的Redis端口

@@ -5,6 +5,7 @@ import (
 	"github.com/kataras/iris"
 )
 
+/*从机模式下用于从外部探测服务是否在线*/
 func Ping(ctx iris.Context) {
 	pong, err := Cache.Ping()
 	if err == nil {

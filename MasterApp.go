@@ -8,6 +8,7 @@ import (
 	"github.com/kataras/iris/middleware/logger"
 )
 
+//此函数用于在主函数中创建主机模式的iris.Application
 func MasterApp() *iris.Application {
 	util.LogE(Dao.CacheInit())
 

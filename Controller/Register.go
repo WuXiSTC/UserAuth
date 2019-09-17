@@ -5,6 +5,7 @@ import (
 	"github.com/kataras/iris"
 )
 
+/*用户注册API*/
 func Register(ctx iris.Context) {
 	ID := ctx.PostValue("ID")
 	PASS := ctx.PostValue("PASS")

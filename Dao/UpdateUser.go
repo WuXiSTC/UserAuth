@@ -6,7 +6,9 @@ import (
 	"./Database"
 )
 
-/*在数据库中更新密码*/
+//更新密码
+//
+//返回值是(bool,error)分别表示更新是否成功和错误信息
 func UpdateUser(user, newUser User) (bool, error) {
 	ID := user.GetID()
 	_, _ = Cache.DelUser(ID) //不管三七二十一先删缓存
