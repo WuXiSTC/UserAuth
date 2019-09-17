@@ -2,6 +2,7 @@ package Service
 
 import "../Dao"
 
+//修改密码：直接搞Dao.UpdateUser，如果更新不成功会自己报错的
 func UpdateUser(ID, PASS, newPASS string) (bool, error) {
 	user := new(User)
 	user.SetID(ID)

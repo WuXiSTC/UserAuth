@@ -6,7 +6,7 @@ import (
 	"./Database"
 )
 
-//更新密码
+//更新密码，先删缓存再更新数据库再写入缓存
 //
 //返回值是(bool,error)分别表示更新是否成功和错误信息
 func UpdateUser(user, newUser User) (bool, error) {

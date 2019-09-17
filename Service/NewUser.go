@@ -2,6 +2,7 @@ package Service
 
 import "../Dao"
 
+//新增用户：先Dao.QueryUser查用户存不存在再Dao.InsertUser
 func NewUser(ID, PASS string) (bool, error) {
 	user := new(User)
 	user.SetID(ID)
