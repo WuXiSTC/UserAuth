@@ -1,0 +1,2 @@
+SlaveMode: false #是否是从属模式
+MasterAddress: 127.0.0.1:6379 #如果是从属模式，则在此指定主服务的Redis地址

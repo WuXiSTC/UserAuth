@@ -3,8 +3,6 @@ package Cache
 import (
 	"../../util"
 	"github.com/garyburd/redigo/redis"
-	"gopkg.in/yaml.v2"
-	"io/ioutil"
 )
 
 type config struct {
@@ -22,12 +20,7 @@ func RedisConnect() (redis.Conn, error) {
 	if db != nil {
 		return db, nil
 	}
-	yamlFile, err := ioutil.ReadFile("CacheConfig.yaml")
-	util.LogE(err)
-	if err == nil {
-		err = yaml.Unmarshal(yamlFile, &Conf)
-		util.LogE(err)
-	}
+	util.GetConf("CacheConfig.yaml", &Conf)
 	db, err := redis.Dial(Conf.Network, Conf.Address)
 	return db, err
 }

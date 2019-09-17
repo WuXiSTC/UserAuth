@@ -4,8 +4,6 @@ import (
 	"../../util"
 	"database/sql"
 	_ "github.com/go-sql-driver/mysql"
-	"gopkg.in/yaml.v2"
-	"io/ioutil"
 )
 
 type config struct {
@@ -15,18 +13,13 @@ type config struct {
 }
 
 var db *sql.DB = nil
-var Conf = config{"mysql", "WXSTC:WXSTC@/WXSTC", 4}
+var Conf = config{"mysql", "WXSTC:WXSTC@/WXSTC", 2}
 
 func RDBConnect() (*sql.DB, error) {
 	if db != nil {
 		return db, nil
 	}
-	yamlFile, err := ioutil.ReadFile("DatabaseConfig.yaml")
-	util.LogE(err)
-	if err == nil {
-		err = yaml.Unmarshal(yamlFile, &Conf)
-		util.LogE(err)
-	}
+	util.GetConf("DatabaseConfig.yaml", &Conf)
 	db, err := sql.Open(Conf.Driver, Conf.DataSource)
 	if err != nil {
 		return db, err
