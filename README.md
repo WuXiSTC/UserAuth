@@ -9,9 +9,9 @@
 
 * 本项目由一系列API组成，分两种模式：
   * 主机模式：拥有数据库和缓存，可读可写，包含用户注册、用户验证、密码修改三个功能
-  * 从机模式：仅有缓存，缓存与主机缓存同步，只读，仅包含用户验证功能
+  * 从机模式：仅有缓存，从机缓存与主机缓存同步，只读，仅包含用户验证功能
 
-### 代码结构
+### 源码组织结构
 
 本项目使用 iris 框架，按照典型的三层Web应用结构进行组织。从外到内对应的文件夹依次是`Controller`、`Service`、`Dao`。
 
@@ -19,42 +19,61 @@
 * `Service`：由`Controller`中各函数调用，处理网站业务逻辑，通过`Dao`层操作数据；
 * `Dao`：封装一系列数据操作，向`Service`层隐藏数据库和缓存架构。
 
+项目提供了预置的Docker封装方案，可直接打包为容器化微服务
+
 ## Installation
 
 ### 准备
 
-1. 安装redis
+1. 安装并运行MySQL和Redis
+2. 用Dao文件夹下的两个.sql文件建好MySQL数据库
+3. 在配置文件中写上Redis和MySQL数据库的地址(详见配置文件说明)
+
+### 使用Docker启动
+
+#### 编译(可选步骤)
+
+（项目根目录下已提供了一个用下面👇这条指令编译好的可执行文件，因此这步可以省略）
+
+```shell
+docker run -it --rm -v "$(PWD):/app" yindaheng98/go-iris go build -v -o UserAuth
+```
+
+1. 在项目根目录运行上面👆的指令
+2. 编译完成后会在项目根目录下生成可执行文件UserAuth
+
+#### 打包运行
+
+1. 在项目根目录下运行`docker build .`打包一个镜像
+2. 直接运行`docker run [刚才打包好的镜像]`或者将编辑好的配置文件用`-v`挂载到`/home`目录下运行
+3. 用`docker-compose`当然也是可以的
+
+### 不使用docker启动
+
+1. 先把go装好
 2. `go get github.com/kataras/iris`
 
    `go get github.com/go-sql-driver/mysql`
 
    `go get github.com/garyburd/redigo/redis`
-3. `git clone https://gitee.com/WuXiSTC/UserAuth`
-
-### 以主机模式启动
-
-1. 安装mysql
-2. 用Dao文件夹下的两个.sql文件建mysql数据库
-3. 在配置文件中写上redis和mysql的地址，并配置为主机模式(详见配置文件说明)
-4. `cd UserAuth`
-5. `go run main.go`
-
-### 以从机模式启动
-
-1. 在别的地方以主机模式启动一个本应用
-2. 在配置文件中写上以主机模式启动的那个应用的redis数据库地址和端口号(详见配置文件说明)
-3. `cd UserAuth`
-4. `go run main.go`
+3. `go build`
 
 ## Instructions
 
 ### 单主机模式
 
-按照上文“以主机模式启动”的说明启动单个主机，这是通常的数据库+缓存模式
+主机模式是通常的数据库+缓存模式
+
+1. 在配置文件中`DatabaseConfig.yaml`和`CacheConfig.yaml`中写上Redis和MySQL数据库的地址，在配置文件`SlaveConfig.yaml`中配置主机模式(详见配置文件说明)
+2. 按照上一节的说明启动
 
 ### 多主机模式
 
-启动一个主机和多个从机，写任务交给主机，读任务交给从机，在此应用外面再套一层负载均衡或者用从机建一个CDN网络
+启动一个主机和多个从机，写任务交给主机，读任务交给从机，在此应用外面再套一层负载均衡或者用从机建一个CDN网络做成可水平扩展的分布式系统。Redis数据库之间的连接需要其他安全手段保护。
+
+1. 要求先在其他地方以主机模式部署启动好一个本应用
+2. 在配置文件中`CacheConfig.yaml`中写上Redis数据库的地址，在配置文件`SlaveConfig.yaml`中配置从机模式(详见配置文件说明)
+3. 按照上一节的说明启动
 
 ### 主机模式POST格式
 
