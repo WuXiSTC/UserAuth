@@ -1,9 +1,9 @@
 package Cache
 
-func Clear() (interface{}, error) {
+func Flushall() (interface{}, error) {
 	db, err := RedisConnect()
 	if err != nil {
 		return nil, err
 	}
-	return db.Do("CLEAR")
+	return db.Do("FLUSHALL")
 }
