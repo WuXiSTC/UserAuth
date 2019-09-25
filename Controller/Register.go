@@ -17,7 +17,9 @@ func Register(ctx iris.Context) {
 		return
 	}
 	if !ok {
-		responseMsg(ctx, iris.Map{"ok": false, "message": "用户名已存在"})
+		responseMsg(ctx, iris.Map{
+			"ok":      false,
+			"message": "用户名已存在"})
 		return
 	}
 	responseMsg(ctx, iris.Map{"ok": true, "message": "注册成功"})

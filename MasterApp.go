@@ -3,6 +3,7 @@ package main
 import (
 	"./Controller"
 	"./Dao"
+	"./Dao/Database"
 	"./util"
 	"github.com/kataras/iris"
 	"github.com/kataras/iris/middleware/logger"
@@ -10,8 +11,8 @@ import (
 
 //此函数用于在主函数中创建主机模式的iris.Application
 func MasterApp() *iris.Application {
+	Database.ConfigureDatabase()
 	util.LogE(Dao.CacheInit())
-
 	app := iris.New()
 	app.Use(logger.New())
 	app.Use(Controller.BeforeHandler)
