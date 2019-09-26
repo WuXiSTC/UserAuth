@@ -4,12 +4,13 @@ import (
 	"../util"
 	"./Cache"
 	"./Database"
+	"./Interfaces"
 )
 
 //查找用户是否存在：先查缓存再查数据库，数据库中有就放缓存
 //
 //有就返回true,nil；没有就返回false,[错误信息]
-func UserExists(user User) (bool, error) {
+func UserExists(user Interfaces.User) (bool, error) {
 	ID := user.GetID()
 	PASS, err := Cache.GetUserPASS(ID)
 	if PASS != "" {

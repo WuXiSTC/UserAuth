@@ -4,12 +4,13 @@ import (
 	"../util"
 	"./Cache"
 	"./Database"
+	"./Interfaces"
 )
 
 //验证用户：验证用户名密码是否正确，如果发现验证的用户不在缓存就会去数据库查找，如果查到了就写缓存
 //
 //如果验证通过则返回true,nil；用户名密码错误则返回false,nil；出错则返回false,[错误信息]
-func QueryUser(user User) (bool, error) {
+func QueryUser(user Interfaces.User) (bool, error) {
 	ok, err := VerifyCachedUser(user) //先查缓存
 	if err == nil {
 		return ok, nil //缓存中有则返回

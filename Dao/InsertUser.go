@@ -4,12 +4,13 @@ import (
 	"../util"
 	"./Cache"
 	"./Database"
+	"./Interfaces"
 )
 
 //插入用户，先插数据库再插缓存；只负责插入不负责用户名冲突验证
 //
 //插入成功返回true,nil；失败返回false,[错误信息]
-func InsertUser(user User) (bool, error) {
+func InsertUser(user Interfaces.User) (bool, error) {
 	ID := user.GetID()
 	PASS := user.GetPASS()
 	ok, err := Database.InsertUser(ID, PASS)

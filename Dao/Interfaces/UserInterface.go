@@ -1,4 +1,4 @@
-package Dao
+package Interfaces
 
 //最基础的用户接口
 type User interface {
