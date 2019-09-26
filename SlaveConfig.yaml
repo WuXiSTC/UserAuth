@@ -4,7 +4,7 @@
 SlaveMode: false
 
 #在此配置应用要连接的Redis数据库地址
-SlaveAddress: 127.0.0.1:6379
+SlaveAddress: 127.0.0.1:6380
 
 #是否进行从机初始化
 SlaveInit: false
