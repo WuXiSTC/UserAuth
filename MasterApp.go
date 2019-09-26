@@ -4,6 +4,7 @@ import (
 	"./Controller"
 	"./Dao"
 	"./Dao/Cache"
+	"./Dao/Daemons"
 	"./Dao/Database"
 	"./util"
 	"github.com/kataras/iris"
@@ -11,10 +12,11 @@ import (
 )
 
 //此函数用于在主函数中创建主机模式的iris.Application
-func MasterApp(DbConfPath, RdsConfPath string) *iris.Application {
+func MasterApp(DbConfPath, RdsConfPath, DmsConfPath string) *iris.Application {
 	Database.ConfigureDatabase(DbConfPath)
 	Cache.ConfigureRedis(RdsConfPath)
 	util.LogE(Dao.CacheInit())
+	Daemons.StartDaemons(DmsConfPath)
 	app := iris.New()
 	app.Use(logger.New())
 	app.Use(Controller.BeforeHandler)

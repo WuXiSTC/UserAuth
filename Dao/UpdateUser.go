@@ -3,23 +3,23 @@ package Dao
 import (
 	"../util"
 	"./Cache"
-	"./Database"
+	"./Daemons"
 	"./Interfaces"
 )
 
 //更新密码，先删缓存再更新数据库再写入缓存
 //
-//更新成功则返回true,nil；用户名密码错误则返回false,nil；出错则返回false,[错误信息]
+//更新成功则返回true,nil；失败则返回false,[错误信息]
 func UpdateUser(newUser Interfaces.User) (bool, error) {
 	ID := newUser.GetID()
-	_, err := Cache.DelUser(ID) //不管三七二十一先删缓存
+	PASS := newUser.GetPASS()
+	_, err := Cache.SetUser(ID, PASS) //直接写缓存
 	util.LogE(err)
-
-	newPASS := newUser.GetPASS()
-	ok, err := Database.UpdateUser(ID, newPASS)
-	if ok { //数据库修改完成了就写入缓存
-		_, errR := Cache.SetUser(ID, newPASS)
+	if err != nil { //如果缓存写入失败则回滚
+		_, errR := Cache.DelUser(ID)
 		util.LogE(errR)
+		return false, err
 	}
-	return ok, err
+	Daemons.UpdateQ <- newUser
+	return true, nil
 }

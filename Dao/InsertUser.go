@@ -3,7 +3,7 @@ package Dao
 import (
 	"../util"
 	"./Cache"
-	"./Database"
+	"./Daemons"
 	"./Interfaces"
 )
 
@@ -13,11 +13,13 @@ import (
 func InsertUser(user Interfaces.User) (bool, error) {
 	ID := user.GetID()
 	PASS := user.GetPASS()
-	ok, err := Database.InsertUser(ID, PASS)
-	if err == nil && ok { //如果在数据库中插入成功了就向缓存中写入用户信息
-		_, errR := Cache.SetUser(ID, PASS)
-		util.LogE(errR)
-	}
+	_, err := Cache.SetUser(ID, PASS) //直接写缓存
 	util.LogE(err)
-	return ok, err
+	if err != nil { //如果缓存写入失败则回滚
+		_, errR := Cache.DelUser(ID)
+		util.LogE(errR)
+		return false, err
+	}
+	Daemons.InsertQ <- user //缓存写入成功则通过InsertDaemon写数据库
+	return true, nil
 }

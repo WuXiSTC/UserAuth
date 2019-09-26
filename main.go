@@ -18,7 +18,11 @@ func main() {
 	if Conf.SlaveMode { //从机模式
 		app = SlaveApp("SlaveConfig.yaml")
 	} else { //主机模式
-		app = MasterApp("DatabaseConfig.yaml", "RedisConfig.yaml")
+		app = MasterApp(
+			"DatabaseConfig.yaml",
+			"RedisConfig.yaml",
+			"DaemonsConfig.yaml",
+		)
 	}
 
 	err := app.Run(iris.Addr(":8080"))
