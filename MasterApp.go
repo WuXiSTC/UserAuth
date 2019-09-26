@@ -11,9 +11,9 @@ import (
 )
 
 //此函数用于在主函数中创建主机模式的iris.Application
-func MasterApp() *iris.Application {
-	Database.ConfigureDatabase()
-	Cache.ConfigureRedis()
+func MasterApp(DbConfPath, RdsConfPath string) *iris.Application {
+	Database.ConfigureDatabase(DbConfPath)
+	Cache.ConfigureRedis(RdsConfPath)
 	util.LogE(Dao.CacheInit())
 	app := iris.New()
 	app.Use(logger.New())

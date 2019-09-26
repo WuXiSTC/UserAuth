@@ -16,8 +16,8 @@ type config struct {
 var db redis.Conn = nil
 var Conf = config{6000, 300, 300, "tcp", "127.0.0.1:6379"}
 
-func ConfigureRedis() {
-	util.GetConf("RedisConfig.yaml", &Conf)
+func ConfigureRedis(path string) {
+	util.GetConf(path, &Conf)
 }
 
 func RedisConnect() (redis.Conn, error) {

@@ -43,8 +43,8 @@ var Conf = Config{
 	},
 }
 
-func ConfigureDatabase() {
-	util.GetConf("DatabaseConfig.yaml", &Conf)
+func ConfigureDatabase(path string) {
+	util.GetConf(path, &Conf)
 }
 
 func RDBConnect() (*sql.DB, error) {

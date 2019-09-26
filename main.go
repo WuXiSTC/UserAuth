@@ -8,19 +8,17 @@ import (
 	"github.com/kataras/iris"
 )
 
-var slaveConf = Dao.SlaveConfig{}
-
 //main 主函数
 func main() {
 
-	util.GetConf("SlaveConfig.yaml", &slaveConf) //先读配置文件
-
 	var app *iris.Application
 
-	if slaveConf.SlaveMode { //从机模式
-		app = SlaveApp(slaveConf)
+	Conf := Dao.SlaveConf
+	util.GetConf("SlaveConfig.yaml", &Conf)
+	if Conf.SlaveMode { //从机模式
+		app = SlaveApp("SlaveConfig.yaml")
 	} else { //主机模式
-		app = MasterApp()
+		app = MasterApp("DatabaseConfig.yaml", "RedisConfig.yaml")
 	}
 
 	err := app.Run(iris.Addr(":8080"))
