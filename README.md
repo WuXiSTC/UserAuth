@@ -37,22 +37,41 @@
 
 #### 编译(可选步骤)
 
-（项目根目录下已提供了一个用下面👇这条指令编译好的可执行文件，因此这步可以省略）
+（`TestCompose/app`目录下已提供了一个用下面👇这条指令编译好的可执行文件，执行此步只会覆盖已有文件，因此可以省略）
 
 （👇这个指令编译是生成Alpine平台的可执行文件，如果要在其他平台编译请自行解决）
 
 ```shell
-docker run -it --rm -v "$(PWD):/app" yindaheng98/go-iris go build -v -o UserAuth
+docker run -it --rm -v "$(pwd):/app" yindaheng98/go-iris go build -v -o TestCompose/app/UserAuth
 ```
 
 1. 在项目根目录运行上面👆的指令
-2. 编译完成后会在项目根目录下生成可执行文件UserAuth
+2. 编译完成后会在`TestCompose/app/`目录下生成可执行文件UserAuth
 
 #### 打包运行
 
-1. 在项目根目录下运行`docker build .`打包一个镜像
-2. 直接运行`docker run [刚才打包好的镜像]`或者将编辑好的配置文件用`-v`挂载到`/home`目录下运行
-3. 用`docker-compose`当然也是可以的
+注：配置文件必须和可执行文件在同一目录下
+
+* 在`TestCompose`目录下建立Dockerfile👇打包成容器运行
+
+```Dockerfile
+FROM alpine
+
+RUN mkdir /app
+
+ADD ./app /app
+
+EXPOSE 8080
+WORKDIR /app
+VOLUME [ "/app" ]
+ENTRYPOINT ["/app/UserAuth" ]
+```
+
+* 或者也可以直接根目录挂载文件运行
+
+```sh
+docker run -v "$(pwd)/TestCompose/app:/app" -p 8080:8080 alpine sh -c "cd /app && ./UserAuth"
+```
 
 ### 不使用docker启动
 

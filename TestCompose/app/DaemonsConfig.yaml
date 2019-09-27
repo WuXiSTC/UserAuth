@@ -1,0 +1,14 @@
+#此文件是后台数据库写入线程相关的设置
+#本应用的数据库写入操作是异步进行的
+#当有INSERT或者UPDATE的操作时，先在缓存中操作，然后入数据库操作队列
+#后台有三种进程负责数据库操作，它们将从数据库操作队列中获取操作进行执行
+#它们分别是：
+#InsertDaemons：负责插入数据
+#UpdateDaemons：负责修改数据
+#DeleteDaemons：负责当上面两个Daemons数据操作失败时在缓存中删除信息
+
+#下面这三个量分别是这三种Daemon的数量
+#为充分发挥多核性能，可以考虑按照CPU核数配置此项
+NumOfInsertDaemons: 8
+NumOfDeleteDaemons: 8
+NumOfUpdateDaemons: 8

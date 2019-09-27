@@ -1,0 +1,6 @@
+#缓存配置文件
+ExistTime: 6000 #设置每个缓存的存活时间，单位秒
+RandExistTime: 300 #设置缓存的随机变化范围，单位秒。防止缓存雪崩
+InitialCache: 3000 #设置初始缓存数量，在服务器启动时写入多少记录，单位条
+Network: tcp #redis连接协议
+Address: redis:6379 #Redis数据库地址

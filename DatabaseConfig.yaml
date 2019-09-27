@@ -20,6 +20,6 @@ RDBConfig:
 # Cassandra数据库配置文件，只在使用Cassandra时有用
 CDBConfig:
   KeySpace: wxstc
-  Port: 9043
+  Port: 9042
   Hosts:
     - "127.0.0.1"

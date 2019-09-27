@@ -17,5 +17,5 @@ MasterHost: redis #主机的Redis地址
 MasterPort: 6379 #主机的Redis端口
 
 #在此配置应用要连接的主机模式应用地址
-MasterAppAddr: 127.0.0.1:8081
+MasterAppAddr: 127.0.0.1:8080
 #当从机在自己的数据库中查不到用户时，会向这个地址的/Verify接口进行查询

@@ -1,0 +1,91 @@
+version: "3"
+services:
+  #应用集群，两主两从，映射端口80-83
+  app:
+    build: .
+    ports:
+      - "80:8080"
+    depends_on:
+      - cassandra
+      - redis
+  app-1:
+    build: .
+    ports:
+      - "81:8080"
+    depends_on:
+      - cassandra
+      - redis
+    volumes:
+      - "./app-1"
+  app-2:
+    build: .
+    ports:
+      - "82:8080"
+    depends_on:
+      - cassandra
+      - redis
+    volumes:
+      - "./app-2"
+  app-3:
+    build: .
+    ports:
+      - "83:8080"
+    depends_on:
+      - cassandra
+      - redis
+    volumes:
+      - "./app-3"
+
+  #cassandra集群，四台，映射端口9042-9045
+  cassandra:
+    image: cassandra
+    ports:
+      - "7000:7000"
+      - "7001:7001"
+      - "9042:9042"
+      - "7199:7199"
+      - "9160:9160"
+    volumes:
+      - "./Data:/var/lib/cassandra"
+  cassandra-1:
+    image: cassandra
+    ports:
+      - "9043:9042"
+    volumes:
+      - "./Data-1:/var/lib/cassandra"
+    environment:
+      CASSANDRA_SEEDS: cassandra
+  cassandra-2:
+    image: cassandra
+    ports:
+      - "9044:9042"
+    volumes:
+      - "./Data-2:/var/lib/cassandra"
+    environment:
+      CASSANDRA_SEEDS: cassandra
+  cassandra-3:
+    image: cassandra
+    ports:
+      - "9045:9042"
+    volumes:
+      - "./Data-3:/var/lib/cassandra"
+    environment:
+      CASSANDRA_SEEDS: cassandra
+
+  #redis集群，四台，映射端口6379-6382
+  redis:
+    image: redis
+    ports:
+      - "6379:6379"
+  redis-1:
+    image: redis
+    ports:
+      - "6380:6379"
+  redis-2:
+    image: redis
+    ports:
+      - "6381:6379"
+  redis-3:
+    image: redis
+    ports:
+      - "6382:6379"
