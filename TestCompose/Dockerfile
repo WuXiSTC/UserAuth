@@ -2,7 +2,7 @@ FROM alpine
 
 RUN mkdir /app
 
-ADD ./TestCompose/app /app
+ADD app /app
 
 EXPOSE 8080
 WORKDIR /app

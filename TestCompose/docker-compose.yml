@@ -16,7 +16,7 @@ services:
       - cassandra
       - redis
     volumes:
-      - "./app-1"
+      - "./app-1:/app"
   app-2:
     build: .
     ports:
@@ -25,7 +25,7 @@ services:
       - cassandra
       - redis
     volumes:
-      - "./app-2"
+      - "./app-2:/app"
   app-3:
     build: .
     ports:
@@ -34,7 +34,7 @@ services:
       - cassandra
       - redis
     volumes:
-      - "./app-3"
+      - "./app-3:/app"
 
   #cassandra集群，四台，映射端口9042-9045
   cassandra:
