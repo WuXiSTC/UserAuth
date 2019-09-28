@@ -1,0 +1,25 @@
+# 如果使用Cassandra数据库就把这里写true
+#如果使用SQL数据库就把这里写false(Go语言内置的sql抽象类)
+UseCassandra: true
+
+#关系数据库配置文件，只在使用SQL数据库时有用
+RDBConfig:
+  Driver: mysql #数据库驱动
+  Username: WXSTC #用户名
+  Password: WXSTC #密码
+  Host: 127.0.0.1 #数据库IP地址
+  Port: 3306 #数据库端口号，设空默认3306
+  Database: WXSTC #数据库名
+  ConfString: charset=utf8 #数据库连接设置
+  # 上面这几项将被组合为"sql.Open"函数的"dataSource"参数：
+  # "[Username]:[Password]@tcp([Host]:[Port])/[Database]?[ConfString]"
+  # 用于连接数据库
+  # 数据库中必须有WXSTC.sql文件中给出的User表并且有读写权限
+  MaxOpenConns: 4 #数据库中同时存在的连接总数
+
+# Cassandra数据库配置文件，只在使用Cassandra时有用
+CDBConfig:
+  KeySpace: wxstc
+  Port: 9042
+  Hosts:
+    - cassandra
