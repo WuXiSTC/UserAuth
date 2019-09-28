@@ -2,76 +2,64 @@ version: "3"
 services:
   #应用集群，两主两从，映射端口80-83
   app:
-    build: .
+    build: ..
     ports:
       - "80:8080"
     depends_on:
       - cassandra
       - redis
+    volumes:
+      - "./Config:/Config"
   app-1:
-    build: .
+    build: ..
     ports:
       - "81:8080"
     depends_on:
-      - cassandra
-      - redis
+      - app
     volumes:
-      - "./app-1:/app"
+      - "./Config-1:/Config"
   app-2:
-    build: .
+    build: ..
     ports:
       - "82:8080"
     depends_on:
-      - cassandra
-      - redis
+      - app-1
     volumes:
-      - "./app-2:/app"
-  app-3:
-    build: .
-    ports:
-      - "83:8080"
-    depends_on:
-      - cassandra
-      - redis
-    volumes:
-      - "./app-3:/app"
+      - "./Config-2:/Config"
 
-  #cassandra集群，四台，映射端口9042-9045
+  #cassandra集群，两台，映射端口9042-9044
+  #傻逼Windows挂载数据盘运行报错，浪费劳资时间
+  #下面这个配置只能用linux上装的docker运行，基于windows hyper-V的不能用
   cassandra:
     image: cassandra
     ports:
-      - "7000:7000"
-      - "7001:7001"
       - "9042:9042"
-      - "7199:7199"
-      - "9160:9160"
     volumes:
-      - "./Data:/var/lib/cassandra"
+      - "./Data/Cassandra:/var/lib/cassandra"
+    command: 'cassandra -fR'
   cassandra-1:
     image: cassandra
     ports:
       - "9043:9042"
+    depends_on: 
+      - cassandra
     volumes:
-      - "./Data-1:/var/lib/cassandra"
+      - "./Data/Cassandra-1:/var/lib/cassandra"
+    command: 'cassandra -fR'
     environment:
       CASSANDRA_SEEDS: cassandra
   cassandra-2:
     image: cassandra
     ports:
-      - "9044:9042"
+      - "9043:9042"
+    depends_on: 
+      - cassandra-1
     volumes:
-      - "./Data-2:/var/lib/cassandra"
+      - "./Data/Cassandra-2:/var/lib/cassandra"
+    command: 'cassandra -fR'
     environment:
-      CASSANDRA_SEEDS: cassandra
-  cassandra-3:
-    image: cassandra
-    ports:
-      - "9045:9042"
-    volumes:
-      - "./Data-3:/var/lib/cassandra"
-    environment:
-      CASSANDRA_SEEDS: cassandra
-
+      CASSANDRA_SEEDS: cassandra-1
+  
   #redis集群，四台，映射端口6379-6382
   redis:
     image: redis
@@ -85,7 +73,3 @@ services:
     image: redis
     ports:
       - "6381:6379"
-  redis-3:
-    image: redis
-    ports:
-      - "6382:6379"

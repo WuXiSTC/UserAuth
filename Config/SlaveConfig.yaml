@@ -1,0 +1,19 @@
+#从机模式配置文件
+
+#在此配置应用要连接的Redis数据库地址
+SlaveAddress: 127.0.0.1:6380
+
+#是否进行从机初始化
+SlaveInit: false
+#如果此值设为true，那么在应用启动的时候会有如下操作：
+#在[SlaveAddress]所指的Redis数据库中运行"slaveof [MasterHost]:[MasterPort]"指令
+
+#在此配置应用要连接的主Redis数据库地址
+#如上所述，这两项配置只在SlaveInit为true时会用到
+MasterHost: redis #主机的Redis地址
+MasterPort: 6379 #主机的Redis端口
+
+#此配置暂时无效
+#在此配置应用要连接的主机模式应用地址
+MasterAppAddr: 127.0.0.1:8080
+#TODO:当从机在自己的数据库中查不到用户时，向这个地址的/Verify接口进行查询

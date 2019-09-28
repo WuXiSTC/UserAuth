@@ -3,28 +3,33 @@
 package main
 
 import (
-	"./Dao"
 	"./util"
 	"github.com/kataras/iris"
 )
+
+type Config struct {
+	Listen  string `yaml:"Listen"`
+	SlaveMode bool   `yaml:"SlaveMode"`
+}
+
+var Conf = Config{":8080", false}
 
 //main 主函数
 func main() {
 
 	var app *iris.Application
 
-	Conf := Dao.SlaveConf
-	util.GetConf("SlaveConfig.yaml", &Conf)
+	util.GetConf("Config/ServerConfig.yaml", &Conf)
 	if Conf.SlaveMode { //从机模式
-		app = SlaveApp("SlaveConfig.yaml")
+		app = SlaveApp("Config/SlaveConfig.yaml")
 	} else { //主机模式
 		app = MasterApp(
-			"DatabaseConfig.yaml",
-			"RedisConfig.yaml",
-			"DaemonsConfig.yaml",
+			"Config/DatabaseConfig.yaml",
+			"Config/RedisConfig.yaml",
+			"Config/DaemonsConfig.yaml",
 		)
 	}
 
-	err := app.Run(iris.Addr(":8080"))
+	err := app.Run(iris.Addr(Conf.Listen))
 	util.LogE(err)
 }

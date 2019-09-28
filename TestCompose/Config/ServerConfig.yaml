@@ -1,0 +1,5 @@
+#服务器监听地址
+Listen: :8080
+
+#是否以从机模式启动
+SlaveMode: false
