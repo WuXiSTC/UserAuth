@@ -1,1 +1,4 @@
-Cassandra*
+Cassandra/*
+Cassandra*/*
+!Cassandra
+!Cassandra-*
