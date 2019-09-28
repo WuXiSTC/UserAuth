@@ -15,7 +15,9 @@ import (
 func MasterApp(DbConfPath, RdsConfPath, DmsConfPath string) *iris.Application {
 	Database.ConfigureDatabase(DbConfPath)
 	Cache.ConfigureRedis(RdsConfPath)
-	util.LogE(Dao.CacheInit())
+	if Cache.Conf.InitAtStart {
+		util.LogE(Dao.CacheInit())
+	}
 	Daemons.StartDaemons(DmsConfPath)
 	app := iris.New()
 	app.Use(logger.New())

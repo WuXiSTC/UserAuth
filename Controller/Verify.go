@@ -2,6 +2,7 @@ package Controller
 
 import (
 	"../Service"
+	"../util"
 	"github.com/kataras/iris"
 )
 
@@ -11,6 +12,7 @@ func Verify(ctx iris.Context) {
 	PASS := ctx.PostValue("PASS")
 	ok, err := Service.VerifyUser(ID, PASS)
 	if err != nil {
+		util.LogE(err)
 		responseMsg(ctx, iris.Map{
 			"ok":      false,
 			"message": "验证失败，请联系管理员"})
