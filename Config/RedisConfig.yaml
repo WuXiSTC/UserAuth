@@ -1,7 +1,14 @@
 #缓存配置文件
-ExistTime: 6000 #设置每个缓存的存活时间，单位秒
+ExistTime: 6000 #设置每个缓存的存活时间，单位秒。如果设置为-1则是不设置存活时间
 RandExistTime: 300 #设置缓存的随机变化范围，单位秒。防止缓存雪崩
 Network: tcp #redis连接协议
 Address: 127.0.0.1:6379 #Redis数据库地址
-InitAtStart: true #是否进行缓存初始化，即在项目启动时查询数据库重新写入缓存
+
+#缓存初始化相关设置。缓存初始化即在项目启动时查询数据库重新写入缓存
+InitAtStart: true #是否进行缓存初始化
 InitialCache: 3000 #设置初始缓存数量，在服务器启动时写入多少记录，单位条
+
+#集群meet相关设置
+MeetAtStart: true #是否在启动时meet某个redis
+MeetAddress: redis-1 #要meet的地址
+MeetPort: 6379 #要meet的端口

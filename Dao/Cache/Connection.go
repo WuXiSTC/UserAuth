@@ -12,10 +12,18 @@ type Config struct {
 	Address       string `yaml:"Address"`
 	InitAtStart   bool   `yaml:"InitAtStart"`
 	InitialCache  uint64 `yaml:"InitialCache"` //设置初始缓存数量，在服务器启动时写入多少记录，单位条
+	MeetAtStart   bool   `yaml:"MeetAtStart"`  //是否在启动时meet某个redis
+	MeetAddress   string `yaml:"MeetAddress"`  //redis-1 #要meet的地址
+	MeetPort      uint16 `yaml:"MeetPort"`     //要meet的端口
 }
 
 var db redis.Conn = nil
-var Conf = Config{6000, 300, "tcp", "127.0.0.1:6379", true, 300}
+var Conf = Config{
+	6000, 300,
+	"tcp", "127.0.0.1:6379",
+	true, 300,
+	false, "127.0.0.1", 6379,
+}
 
 func ConfigureRedis(path string) {
 	util.GetConf(path, &Conf)

@@ -29,37 +29,37 @@ services:
 
   #cassandra集群，两台，映射端口9042-9044
   #傻逼Windows挂载数据盘运行报错，浪费劳资时间
-  #下面这个配置只能用linux上装的docker运行，基于windows hyper-V的不能用
+  #下面这个配置只能用linux上装的docker运行，基于windows hyper-V的不能用，因为win下挂数据盘运行出错
   cassandra:
     image: cassandra
     ports:
       - "9042:9042"
     volumes:
       - "./Data/Cassandra:/var/lib/cassandra"
-    command: 'cassandra -fR'
+    command: "cassandra -fR"
   cassandra-1:
     image: cassandra
     ports:
       - "9043:9042"
-    depends_on: 
+    depends_on:
       - cassandra
     volumes:
       - "./Data/Cassandra-1:/var/lib/cassandra"
-    command: 'cassandra -fR'
+    command: "cassandra -fR"
     environment:
       CASSANDRA_SEEDS: cassandra
   cassandra-2:
     image: cassandra
     ports:
       - "9044:9042"
-    depends_on: 
+    depends_on:
       - cassandra-1
     volumes:
       - "./Data/Cassandra-2:/var/lib/cassandra"
-    command: 'cassandra -fR'
+    command: "cassandra -fR"
     environment:
       CASSANDRA_SEEDS: cassandra-1
-  
+
   #redis集群，四台，映射端口6379-6382
   redis:
     image: redis
