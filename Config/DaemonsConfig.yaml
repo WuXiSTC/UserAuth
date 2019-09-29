@@ -12,3 +12,6 @@
 NumOfInsertDaemons: 8
 NumOfDeleteDaemons: 8
 NumOfUpdateDaemons: 8
+
+#这是输入到上面那三种Daemon的消息队列的缓冲区大小
+BufferSize: 200

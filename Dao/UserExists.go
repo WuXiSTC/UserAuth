@@ -13,12 +13,11 @@ import (
 func UserExists(user Interfaces.User) (bool, error) {
 	ID := user.GetID()
 	PASS, err := Cache.GetUserPASS(ID)
-	if PASS != "" {
+	if err == nil && PASS != "" {
 		return true, nil
 	}
-	util.LogE(err)
 	PASS, err = Database.GetUserPASS(ID)
-	if PASS != "" {
+	if err == nil && PASS != "" {
 		_, errR := Cache.SetUser(ID, PASS)
 		util.LogE(errR)
 		return true, nil
