@@ -5,6 +5,8 @@
 * 本项目是无锡市软件测试中心的用户验证服务
 * 项目基于Go语言，数据库可以选择使用MySQL或者Cassandra，并使用了Redis作为缓存
 
+![功能](_/功能.svg)
+
 ## Software Architecture
 
 * 本项目由一系列API组成，分两种模式：
@@ -15,7 +17,7 @@
 
 本项目使用 iris 框架，按照典型的三层Web应用结构进行组织。从外到内对应的文件夹依次是`Controller`、`Service`、`Dao`。
 
-* `Controller`：存放`Web API`处理函数，所有的Web请求皆直接传递到此文件夹的函数中，是对`Controller`层的`Web API`封装；
+* `Controller`：存放`Web API`处理函数，所有的Web请求皆直接传递到此文件夹的函数中，是对`Service`层的`Web API`封装；
 * `Service`：由`Controller`中各函数调用，处理网站业务逻辑，通过`Dao`层操作数据；
 * `Dao`：封装一系列数据操作，向`Service`层隐藏数据库和缓存架构。
 
