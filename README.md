@@ -57,14 +57,14 @@ docker run -it --rm -v "$(pwd):/app" yindaheng98/go-iris go build -v -o /app/Use
 * 用项目根目录下的Dockerfile👇打包成容器运行
 
 ```sh
-docker build .
-docker run -p 8080:8080 [刚才build的镜像]
+docker build -t user_auth .
+docker run -p 8080:8080 user_auth
 ```
 
 * 还可以再挂载配置文件运行
 
 ```sh
-docker run -v "$(pwd)/Config:/Config" -p 8080:8080 [刚才build的镜像]
+docker run -v "$(pwd)/Config:/Config" -p 8080:8080 user_auth
 ```
 
 ### 不使用docker启动
