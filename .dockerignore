@@ -1,3 +1,4 @@
-*
-!UserAuth
-!Config
+.git
+.gitee
+.idea
+_*
