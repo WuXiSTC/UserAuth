@@ -13,6 +13,7 @@ type SlaveConfig struct {
 	MasterHost    string `yaml:"MasterHost"`   //如果是从属模式，则在此指定主服务的Redis地址
 	MasterPort    uint16 `yaml:"MasterPort"`   //如果是从属模式，则在此指定主服务的Redis端口
 	MasterAppAddr string `yaml:"MasterAppAddr"`
+	Database      int    `yaml:"Database"`
 }
 
 var SlaveConf = SlaveConfig{
@@ -22,6 +23,7 @@ var SlaveConf = SlaveConfig{
 	"redis",
 	6379,
 	"127.0.0.1:80",
+	0,
 }
 
 func SlaveConfigure(path string) {
@@ -32,6 +34,7 @@ func SlaveConfigure(path string) {
 //
 //初始化过程中有任何出错都返回error，顺利完成就返回nil
 func SlaveModeInit() error {
+	Cache.Conf.Database = SlaveConf.Database
 	Cache.Conf.Address = SlaveConf.SlaveAddress
 	db, err := Cache.RedisConnect()
 	if err != nil {
