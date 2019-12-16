@@ -12,3 +12,4 @@ SlaveInit: true
 #如上所述，这两项配置只在SlaveInit为true时会用到
 MasterHost: redis #主机的Redis地址
 MasterPort: 6379 #主机的Redis端口
+Database: 0 #设置要连接的数据库
