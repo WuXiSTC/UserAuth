@@ -13,7 +13,7 @@ type SlaveConfig struct {
 	MasterHost    string `yaml:"MasterHost"`   //如果是从属模式，则在此指定主服务的Redis地址
 	MasterPort    uint16 `yaml:"MasterPort"`   //如果是从属模式，则在此指定主服务的Redis端口
 	MasterAppAddr string `yaml:"MasterAppAddr"`
-	Database      int    `yaml:"Database"`
+	Database      uint8  `yaml:"Database"`
 }
 
 var SlaveConf = SlaveConfig{

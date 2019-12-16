@@ -6,6 +6,7 @@ import (
 )
 
 type Config struct {
+	Database      uint8  `yaml:"Database"`      //设置要连接的数据库
 	ExistTime     uint64 `yaml:"ExistTime"`     //设置每个缓存的存活时间，单位秒
 	RandExistTime int64  `yaml:"RandExistTime"` //设置缓存的随机变化范围，单位秒。防止缓存雪崩
 	Network       string `yaml:"Network"`
@@ -19,6 +20,7 @@ type Config struct {
 
 var db redis.Conn = nil
 var Conf = Config{
+	0,
 	6000, 300,
 	"tcp", "127.0.0.1:6379",
 	true, 300,
@@ -33,6 +35,7 @@ func RedisConnect() (redis.Conn, error) {
 	if db != nil {
 		return db, nil
 	}
-	db, err := redis.Dial(Conf.Network, Conf.Address)
+	option := redis.DialDatabase(int(Conf.Database))
+	db, err := redis.Dial(Conf.Network, Conf.Address, option)
 	return db, err
 }
