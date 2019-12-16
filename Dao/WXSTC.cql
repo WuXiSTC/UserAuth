@@ -1,5 +1,5 @@
 DROP KEYSPACE IF EXISTS WXSTC;
-CREATE KEYSPACE WXSTC WITH REPLICATION={'class':'SimpleStrategy','replication_factor':2};
+CREATE KEYSPACE WXSTC WITH REPLICATION={'class':'SimpleStrategy','replication_factor':1};
 USE WXSTC;
 DROP TABLE IF EXISTS Users;
 CREATE TABLE Users
