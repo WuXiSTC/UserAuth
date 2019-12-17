@@ -1,5 +1,5 @@
 #缓存配置文件
-Database: 1 #设置要连接的数据库
+Database: 0 #设置要连接的数据库
 ExistTime: 6000 #设置每个缓存的存活时间，单位秒。如果设置为-1则是不设置存活时间
 RandExistTime: 300 #设置缓存的随机变化范围，单位秒。防止缓存雪崩
 Network: tcp #redis连接协议
