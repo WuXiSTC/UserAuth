@@ -7,12 +7,3 @@ CREATE TABLE Users
     ID   TEXT PRIMARY KEY,
     PASS TEXT
 );
-DROP KEYSPACE IF EXISTS WXSTC_comp;
-CREATE KEYSPACE WXSTC_comp WITH REPLICATION={'class':'SimpleStrategy','replication_factor':2};
-USE WXSTC_comp;
-DROP TABLE IF EXISTS Users;
-CREATE TABLE Users
-(
-    ID   TEXT PRIMARY KEY,
-    PASS TEXT
-);
