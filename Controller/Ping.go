@@ -1,7 +1,7 @@
 package Controller
 
 import (
-	"../Dao/Cache"
+	"gitee.com/WuXiSTC/UserAuth/Dao/Cache"
 	"github.com/kataras/iris"
 )
 

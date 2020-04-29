@@ -1,8 +1,8 @@
 package Dao
 
 import (
-	"./Cache"
-	"./Interfaces"
+	"gitee.com/WuXiSTC/UserAuth/Dao/Cache"
+	"gitee.com/WuXiSTC/UserAuth/Dao/Interfaces"
 )
 
 //仅在缓存中验证用户名和密码

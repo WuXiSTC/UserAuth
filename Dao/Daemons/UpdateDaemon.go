@@ -1,9 +1,9 @@
 package Daemons
 
 import (
-	"../../util"
-	"../Database"
-	"../Interfaces"
+	"gitee.com/WuXiSTC/UserAuth/Dao/Database"
+	"gitee.com/WuXiSTC/UserAuth/Dao/Interfaces"
+	"gitee.com/WuXiSTC/UserAuth/util"
 )
 
 var UpdateQ = make(chan Interfaces.User, Conf.BufferSize)

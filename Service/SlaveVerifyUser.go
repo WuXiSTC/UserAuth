@@ -1,7 +1,7 @@
 package Service
 
 import (
-	"../Dao"
+	"gitee.com/WuXiSTC/UserAuth/Dao"
 )
 
 //仅用于从机模式中验证用户

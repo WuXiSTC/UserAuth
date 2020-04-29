@@ -1,12 +1,12 @@
 package main
 
 import (
-	"./Controller"
-	"./Dao"
-	"./Dao/Cache"
-	"./Dao/Daemons"
-	"./Dao/Database"
-	"./util"
+	"gitee.com/WuXiSTC/UserAuth/Controller"
+	"gitee.com/WuXiSTC/UserAuth/Dao"
+	"gitee.com/WuXiSTC/UserAuth/Dao/Cache"
+	"gitee.com/WuXiSTC/UserAuth/Dao/Daemons"
+	"gitee.com/WuXiSTC/UserAuth/Dao/Database"
+	"gitee.com/WuXiSTC/UserAuth/util"
 	"github.com/kataras/iris"
 	"github.com/kataras/iris/middleware/logger"
 )

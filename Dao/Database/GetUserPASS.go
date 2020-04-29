@@ -1,7 +1,7 @@
 package Database
 
 import (
-	"../../util"
+	"gitee.com/WuXiSTC/UserAuth/util"
 )
 
 /*获取用户密码*/

@@ -1,10 +1,10 @@
 package Dao
 
 import (
-	"../util"
-	"./Cache"
-	"./Database"
-	"./Interfaces"
+	"gitee.com/WuXiSTC/UserAuth/Dao/Cache"
+	"gitee.com/WuXiSTC/UserAuth/Dao/Database"
+	"gitee.com/WuXiSTC/UserAuth/Dao/Interfaces"
+	"gitee.com/WuXiSTC/UserAuth/util"
 )
 
 //查找用户是否存在：先查缓存再查数据库，数据库中有就放缓存

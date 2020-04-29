@@ -1,7 +1,7 @@
 package Cache
 
 import (
-	"../../util"
+	"gitee.com/WuXiSTC/UserAuth/util"
 	"github.com/garyburd/redigo/redis"
 )
 

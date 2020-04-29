@@ -1,7 +1,8 @@
-FROM yindaheng98/go-iris
+FROM golang:alpine
 ADD ./ /app
 WORKDIR /app
-RUN go build -v -o /UserAuth
+RUN go get -d -v ./... && \
+    go build -v -o /UserAuth
 
 FROM alpine
 RUN mkdir /Config

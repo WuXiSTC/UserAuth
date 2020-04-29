@@ -1,10 +1,10 @@
 package Dao
 
 import (
-	"../util"
-	"./Cache"
-	"./Daemons"
-	"./Interfaces"
+	"gitee.com/WuXiSTC/UserAuth/Dao/Cache"
+	"gitee.com/WuXiSTC/UserAuth/Dao/Daemons"
+	"gitee.com/WuXiSTC/UserAuth/Dao/Interfaces"
+	"gitee.com/WuXiSTC/UserAuth/util"
 )
 
 //更新密码，先删缓存再更新数据库再写入缓存

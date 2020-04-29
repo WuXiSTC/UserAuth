@@ -1,8 +1,8 @@
 package Controller
 
 import (
-	"../Service"
-	"../util"
+	"gitee.com/WuXiSTC/UserAuth/Service"
+	"gitee.com/WuXiSTC/UserAuth/util"
 	"github.com/kataras/iris"
 )
 

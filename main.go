@@ -3,12 +3,12 @@
 package main
 
 import (
-	"./util"
+	"gitee.com/WuXiSTC/UserAuth/util"
 	"github.com/kataras/iris"
 )
 
 type Config struct {
-	Listen  string `yaml:"Listen"`
+	Listen    string `yaml:"Listen"`
 	SlaveMode bool   `yaml:"SlaveMode"`
 }
 

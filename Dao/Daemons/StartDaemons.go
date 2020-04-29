@@ -1,6 +1,6 @@
 package Daemons
 
-import "../../util"
+import "gitee.com/WuXiSTC/UserAuth/util"
 
 type Config struct {
 	NumOfInsertDaemons uint16 `yaml:"NumOfInsertDaemons"`

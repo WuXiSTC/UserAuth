@@ -1,7 +1,7 @@
 package Service
 
 import (
-	"../Dao"
+	"gitee.com/WuXiSTC/UserAuth/Dao"
 )
 
 //新增用户：先Dao.UserExists查用户存不存在再Dao.InsertUser

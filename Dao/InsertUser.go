@@ -1,10 +1,10 @@
 package Dao
 
 import (
-	"../util"
-	"./Cache"
-	"./Daemons"
-	"./Interfaces"
+	"gitee.com/WuXiSTC/UserAuth/Dao/Cache"
+	"gitee.com/WuXiSTC/UserAuth/Dao/Daemons"
+	"gitee.com/WuXiSTC/UserAuth/Dao/Interfaces"
+	"gitee.com/WuXiSTC/UserAuth/util"
 )
 
 //插入用户，先插数据库再插缓存；只负责插入不负责用户名冲突验证

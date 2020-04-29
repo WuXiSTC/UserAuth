@@ -1,9 +1,9 @@
 package Dao
 
 import (
-	"../util"
-	"./Cache"
-	"./Database"
+	"gitee.com/WuXiSTC/UserAuth/Dao/Cache"
+	"gitee.com/WuXiSTC/UserAuth/Dao/Database"
+	"gitee.com/WuXiSTC/UserAuth/util"
 )
 
 //主机模式下的缓存初始化：清除缓存后将数据库中的数据写一部分到缓存中

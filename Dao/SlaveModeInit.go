@@ -1,8 +1,8 @@
 package Dao
 
 import (
-	"../util"
-	"./Cache"
+	"gitee.com/WuXiSTC/UserAuth/Dao/Cache"
+	"gitee.com/WuXiSTC/UserAuth/util"
 )
 
 //从机模式的配置信息

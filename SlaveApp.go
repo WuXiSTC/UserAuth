@@ -1,9 +1,9 @@
 package main
 
 import (
-	"./Controller"
-	"./Dao"
-	"./util"
+	"gitee.com/WuXiSTC/UserAuth/Controller"
+	"gitee.com/WuXiSTC/UserAuth/Dao"
+	"gitee.com/WuXiSTC/UserAuth/util"
 	"github.com/kataras/iris"
 	"github.com/kataras/iris/middleware/logger"
 )

@@ -1,6 +1,6 @@
 package Service
 
-import "../Dao"
+import "gitee.com/WuXiSTC/UserAuth/Dao"
 
 //修改密码：先用Dao.QueryUser进行验证再进行Dao.UpdateUser
 //

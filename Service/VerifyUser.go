@@ -1,6 +1,6 @@
 package Service
 
-import "../Dao"
+import "gitee.com/WuXiSTC/UserAuth/Dao"
 
 //主机模式下的验证用户
 func VerifyUser(ID, PASS string) (bool, error) {

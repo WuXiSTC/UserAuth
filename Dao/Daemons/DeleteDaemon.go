@@ -1,9 +1,9 @@
 package Daemons
 
 import (
-	"../../util"
-	"../Cache"
-	"../Interfaces"
+	"gitee.com/WuXiSTC/UserAuth/Dao/Cache"
+	"gitee.com/WuXiSTC/UserAuth/Dao/Interfaces"
+	"gitee.com/WuXiSTC/UserAuth/util"
 )
 
 var DeleteQ = make(chan Interfaces.User, Conf.BufferSize)

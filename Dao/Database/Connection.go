@@ -1,9 +1,9 @@
 package Database
 
 import (
-	"../../util"
 	"database/sql"
 	"fmt"
+	"gitee.com/WuXiSTC/UserAuth/util"
 	_ "github.com/go-sql-driver/mysql"
 	"github.com/gocql/gocql"
 )

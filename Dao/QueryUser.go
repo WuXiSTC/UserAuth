@@ -1,10 +1,10 @@
 package Dao
 
 import (
-	"../util"
-	"./Cache"
-	"./Database"
-	"./Interfaces"
+	"gitee.com/WuXiSTC/UserAuth/Dao/Cache"
+	"gitee.com/WuXiSTC/UserAuth/Dao/Database"
+	"gitee.com/WuXiSTC/UserAuth/Dao/Interfaces"
+	"gitee.com/WuXiSTC/UserAuth/util"
 )
 
 //验证用户：验证用户名密码是否正确，如果发现验证的用户不在缓存就会去数据库查找，如果查到了就写缓存
